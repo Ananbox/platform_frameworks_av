@@ -38,7 +38,11 @@ LOCAL_C_INCLUDES := \
 LOCAL_CFLAGS += -Wall -Wextra -Werror
 
 LOCAL_MODULE:= mediadrmserver
-LOCAL_32_BIT_ONLY := true
+ifeq ($(strip $(MEDIASERVER_MULTILIB)),)
+LOCAL_MULTILIB := 32
+else
+LOCAL_MULTILIB := $(MEDIASERVER_MULTILIB)
+endif
 
 LOCAL_INIT_RC := mediadrmserver.rc
 

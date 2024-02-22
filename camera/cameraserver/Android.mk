@@ -27,7 +27,11 @@ LOCAL_SHARED_LIBRARIES := \
 	libcamera_client
 
 LOCAL_MODULE:= cameraserver
-LOCAL_32_BIT_ONLY := true
+ifeq ($(strip $(MEDIASERVER_MULTILIB)),)
+LOCAL_MULTILIB := 32
+else
+LOCAL_MULTILIB := $(MEDIASERVER_MULTILIB)
+endif
 
 LOCAL_CFLAGS += -Wall -Wextra -Werror -Wno-unused-parameter
 

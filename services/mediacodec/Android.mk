@@ -8,7 +8,11 @@ LOCAL_C_INCLUDES := \
     $(TOP)/frameworks/av/media/libstagefright \
     $(TOP)/frameworks/native/include/media/openmax
 LOCAL_MODULE:= libmediacodecservice
-LOCAL_32_BIT_ONLY := true
+ifeq ($(strip $(MEDIASERVER_MULTILIB)),)
+LOCAL_MULTILIB := 32
+else
+LOCAL_MULTILIB := $(MEDIASERVER_MULTILIB)
+endif
 include $(BUILD_SHARED_LIBRARY)
 
 
@@ -22,7 +26,11 @@ LOCAL_C_INCLUDES := \
     $(TOP)/frameworks/av/media/libstagefright \
     $(TOP)/frameworks/native/include/media/openmax
 LOCAL_MODULE:= mediacodec
-LOCAL_32_BIT_ONLY := true
+ifeq ($(strip $(MEDIASERVER_MULTILIB)),)
+LOCAL_MULTILIB := 32
+else
+LOCAL_MULTILIB := $(MEDIASERVER_MULTILIB)
+endif
 LOCAL_INIT_RC := mediacodec.rc
 include $(BUILD_EXECUTABLE)
 

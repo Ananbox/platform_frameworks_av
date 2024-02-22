@@ -42,7 +42,11 @@ LOCAL_MODULE:= drmserver
 
 LOCAL_MODULE_TAGS := optional
 
-LOCAL_32_BIT_ONLY := true
+ifeq ($(strip $(MEDIASERVER_MULTILIB)),)
+LOCAL_MULTILIB := 32
+else
+LOCAL_MULTILIB := $(MEDIASERVER_MULTILIB)
+endif
 
 LOCAL_INIT_RC := drmserver.rc
 
